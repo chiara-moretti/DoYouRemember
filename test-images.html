@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Immagini - Do You Remember</title>
+</head>
+<body>
+    <h1>Test Caricamento Immagini</h1>
+    <h2>Logo</h2>
+    <img src="images/logo.png" alt="Logo" style="max-width: 300px; border: 2px solid red;">
+    <p>Percorso: images/logo.png</p>
+    
+    <h2>Token</h2>
+    <img src="images/token.jpeg" alt="Token" style="max-width: 300px; border: 2px solid red;">
+    <p>Percorso: images/token.jpeg</p>
+    
+    <h2>Nest</h2>
+    <img src="images/nest.jpeg" alt="Nest" style="max-width: 300px; border: 2px solid red;">
+    <p>Percorso: images/nest.jpeg</p>
+    
+    <script>
+        // Test caricamento immagini
+        const images = ['images/logo.png', 'images/token.jpeg', 'images/nest.jpeg'];
+        images.forEach(src => {
+            const img = new Image();
+            img.onload = () => console.log(`✅ ${src} caricata correttamente`);
+            img.onerror = () => console.error(`❌ ${src} NON caricata`);
+            img.src = src;
+        });
+    </script>
+</body>
+</html>
