@@ -1,4 +1,9 @@
 // ============================================
+// GIF ANIMATA - Le GIF si riproducono automaticamente in loop
+// Nessun codice JavaScript necessario
+// ============================================
+
+// ============================================
 // NAVIGAZIONE E MENU MOBILE
 // ============================================
 
@@ -8,11 +13,13 @@ const navLinks = document.querySelectorAll('.nav-menu a');
 const header = document.querySelector('header');
 
 // Toggle menu mobile
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-});
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+}
 
 // Chiudi menu quando si clicca su un link
 navLinks.forEach(link => {
@@ -25,7 +32,7 @@ navLinks.forEach(link => {
 
 // Chiudi menu quando si clicca fuori
 document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+    if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
         document.body.style.overflow = '';
@@ -42,7 +49,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetId = this.getAttribute('href');
         const target = document.querySelector(targetId);
         
-        if (target) {
+        if (target && header) {
             const headerHeight = header.offsetHeight;
             const targetPosition = target.offsetTop - headerHeight;
             
@@ -62,6 +69,8 @@ let lastScroll = 0;
 const scrollThreshold = 50;
 
 window.addEventListener('scroll', () => {
+    if (!header) return;
+    
     const currentScroll = window.pageYOffset;
     
     // Aggiungi ombra quando si scrolla
@@ -117,73 +126,75 @@ const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const messageInput = document.getElementById('message');
 
-// Validazione in tempo reale
-nameInput.addEventListener('input', () => {
-    validateField(nameInput, nameInput.value.trim().length >= 2, 'Il nome deve contenere almeno 2 caratteri');
-});
+if (contactForm && nameInput && emailInput && messageInput) {
+    // Validazione in tempo reale
+    nameInput.addEventListener('input', () => {
+        validateField(nameInput, nameInput.value.trim().length >= 2, 'Il nome deve contenere almeno 2 caratteri');
+    });
 
-emailInput.addEventListener('input', () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    validateField(emailInput, emailRegex.test(emailInput.value), 'Inserisci un indirizzo email valido');
-});
+    emailInput.addEventListener('input', () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        validateField(emailInput, emailRegex.test(emailInput.value), 'Inserisci un indirizzo email valido');
+    });
 
-messageInput.addEventListener('input', () => {
-    validateField(messageInput, messageInput.value.trim().length >= 10, 'Il messaggio deve contenere almeno 10 caratteri');
-});
+    messageInput.addEventListener('input', () => {
+        validateField(messageInput, messageInput.value.trim().length >= 10, 'Il messaggio deve contenere almeno 10 caratteri');
+    });
 
-function validateField(field, isValid, errorMessage) {
-    const formGroup = field.closest('.form-group');
-    let errorElement = formGroup.querySelector('.error-message');
-    
-    if (!isValid && field.value.length > 0) {
-        if (!errorElement) {
-            errorElement = document.createElement('span');
-            errorElement.className = 'error-message';
-            formGroup.appendChild(errorElement);
+    function validateField(field, isValid, errorMessage) {
+        const formGroup = field.closest('.form-group');
+        let errorElement = formGroup.querySelector('.error-message');
+        
+        if (!isValid && field.value.length > 0) {
+            if (!errorElement) {
+                errorElement = document.createElement('span');
+                errorElement.className = 'error-message';
+                formGroup.appendChild(errorElement);
+            }
+            errorElement.textContent = errorMessage;
+            field.style.borderColor = '#e74c3c';
+        } else {
+            if (errorElement) {
+                errorElement.remove();
+            }
+            field.style.borderColor = field.value.length > 0 ? '#4a90e2' : '#e0e0e0';
         }
-        errorElement.textContent = errorMessage;
-        field.style.borderColor = '#e74c3c';
-    } else {
-        if (errorElement) {
-            errorElement.remove();
-        }
-        field.style.borderColor = field.value.length > 0 ? '#4a90e2' : '#e0e0e0';
     }
-}
 
-// Submit form
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Validazione finale
-    const nameValid = nameInput.value.trim().length >= 2;
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
-    const messageValid = messageInput.value.trim().length >= 10;
-    
-    if (nameValid && emailValid && messageValid) {
-        // Simula invio
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
+    // Submit form
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
         
-        submitButton.textContent = 'Invio in corso...';
-        submitButton.disabled = true;
+        // Validazione finale
+        const nameValid = nameInput.value.trim().length >= 2;
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+        const messageValid = messageInput.value.trim().length >= 10;
         
-        // Simula chiamata API
-        setTimeout(() => {
-            showNotification('Messaggio inviato con successo!', 'success');
-            contactForm.reset();
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
+        if (nameValid && emailValid && messageValid) {
+            // Simula invio
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
             
-            // Reset stili dei campi
-            [nameInput, emailInput, messageInput].forEach(field => {
-                field.style.borderColor = '#e0e0e0';
-            });
-        }, 1500);
-    } else {
-        showNotification('Per favore, compila tutti i campi correttamente.', 'error');
-    }
-});
+            submitButton.textContent = 'Invio in corso...';
+            submitButton.disabled = true;
+            
+            // Simula chiamata API
+            setTimeout(() => {
+                showNotification('Messaggio inviato con successo!', 'success');
+                contactForm.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                // Reset stili dei campi
+                [nameInput, emailInput, messageInput].forEach(field => {
+                    field.style.borderColor = '#e0e0e0';
+                });
+            }, 1500);
+        } else {
+            showNotification('Per favore, compila tutti i campi correttamente.', 'error');
+        }
+    });
+}
 
 // ============================================
 // NOTIFICHE
@@ -237,6 +248,8 @@ if (hero) {
 // ============================================
 
 function updateActiveNav() {
+    if (!header) return;
+    
     const sections = document.querySelectorAll('section[id]');
     const scrollPosition = window.pageYOffset + header.offsetHeight + 100;
     
@@ -278,7 +291,7 @@ serviceCards.forEach(card => {
 // ============================================
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 768 && navMenu && hamburger) {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
         document.body.style.overflow = '';
