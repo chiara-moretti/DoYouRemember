@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Verifica Immagini</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 20px 0; padding: 20px; border: 2px solid #ccc; }
+        img { max-width: 300px; border: 2px solid red; display: block; margin: 10px 0; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test Caricamento Immagini</h1>
+    
+    <div class="test">
+        <h2>Test 1: Percorso relativo</h2>
+        <img src="images/logo.png" alt="Logo" id="img1">
+        <p id="status1">Caricamento...</p>
+    </div>
+    
+    <div class="test">
+        <h2>Test 2: Percorso assoluto</h2>
+        <img src="/images/logo.png" alt="Logo" id="img2">
+        <p id="status2">Caricamento...</p>
+    </div>
+    
+    <div class="test">
+        <h2>Test 3: Con base path GitHub Pages</h2>
+        <img src="/DoYouRemember/images/logo.png" alt="Logo" id="img3">
+        <p id="status3">Caricamento...</p>
+    </div>
+    
+    <div class="test">
+        <h2>Info</h2>
+        <p><strong>Hostname:</strong> <span id="hostname"></span></p>
+        <p><strong>Pathname:</strong> <span id="pathname"></span></p>
+        <p><strong>Origin:</strong> <span id="origin"></span></p>
+    </div>
+    
+    <script>
+        // Mostra info
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('pathname').textContent = window.location.pathname;
+        document.getElementById('origin').textContent = window.location.origin;
+        
+        // Test immagini
+        function testImage(imgId, statusId, src) {
+            const img = document.getElementById(imgId);
+            const status = document.getElementById(statusId);
+            
+            img.onload = function() {
+                status.innerHTML = '<span class="success">✓ Caricata correttamente: ' + src + '</span>';
+            };
+            
+            img.onerror = function() {
+                status.innerHTML = '<span class="error">✗ Errore nel caricamento: ' + src + '</span>';
+            };
+        }
+        
+        testImage('img1', 'status1', 'images/logo.png');
+        testImage('img2', 'status2', '/images/logo.png');
+        testImage('img3', 'status3', '/DoYouRemember/images/logo.png');
+    </script>
+</body>
+</html>
