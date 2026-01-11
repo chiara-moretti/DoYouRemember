@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel - Do You Remember">
+    <title>Admin Panel - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--medium-green) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--light-accent);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .users-table {
+            width: 100%;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .users-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .users-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .users-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-accent);
+        }
+
+        .users-table tr:hover {
+            background-color: var(--bg-light);
+        }
+
+        .user-email {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .refresh-btn {
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        .error {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="admin-header">
+            <div class="container">
+                <h1>Admin Panel</h1>
+                <p class="hero-subtitle">Gestione Utenti Registrati</p>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                    <h2 style="margin: 0; color: var(--secondary-color);">Utenti Registrati</h2>
+                    <button class="btn btn-primary refresh-btn" onclick="loadUsers()">🔄 Aggiorna</button>
+                </div>
+
+                <div id="errorMessage" style="display: none;"></div>
+
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <div class="stat-label">Utenti Totali</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalFiles">0</div>
+                        <div class="stat-label">File Totali</div>
+                    </div>
+                </div>
+
+                <div class="users-table" id="usersTable">
+                    <div class="loading">Caricamento utenti...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        async function loadUsers() {
+            const errorDiv = document.getElementById('errorMessage');
+            const usersTable = document.getElementById('usersTable');
+            
+            try {
+                errorDiv.style.display = 'none';
+                usersTable.innerHTML = '<div class="loading">Caricamento utenti...</div>';
+                
+                const response = await fetch(`${API_URL}/users`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayUsers(data.users);
+                    updateStats(data.users);
+                } else {
+                    throw new Error(data.message || 'Errore nel caricamento degli utenti');
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+                errorDiv.innerHTML = `<div class="error">❌ Errore: ${error.message}. Assicurati che il server sia avviato su http://localhost:3000</div>`;
+                errorDiv.style.display = 'block';
+                usersTable.innerHTML = '<div class="loading">Impossibile caricare gli utenti. Controlla la console per maggiori dettagli.</div>';
+            }
+        }
+
+        function displayUsers(users) {
+            const usersTable = document.getElementById('usersTable');
+            
+            if (users.length === 0) {
+                usersTable.innerHTML = '<div class="loading">Nessun utente registrato ancora.</div>';
+                return;
+            }
+            
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Data di Nascita</th>
+                            <th>Data Registrazione</th>
+                            <th>File</th>
+                            <th>Biografia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            users.forEach(user => {
+                const createdAt = new Date(user.createdAt).toLocaleDateString('it-IT', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                html += `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td><strong>${user.name}</strong></td>
+                        <td class="user-email">${user.email}</td>
+                        <td>${user.birthdate || '-'}</td>
+                        <td>${createdAt}</td>
+                        <td>${user.filesCount || 0}</td>
+                        <td>${user.bio ? (user.bio.length > 50 ? user.bio.substring(0, 50) + '...' : user.bio) : '-'}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            usersTable.innerHTML = html;
+        }
+
+        function updateStats(users) {
+            const totalUsers = users.length;
+            const totalFiles = users.reduce((sum, user) => sum + (user.filesCount || 0), 0);
+            
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('totalFiles').textContent = totalFiles;
+        }
+
+        // Carica gli utenti al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUsers();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contattaci - Do You Remember">
+    <title>Contatti - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="servizi.html">Servizi</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Contatti</h1>
+                <p class="hero-subtitle">Siamo qui per aiutarti</p>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Scrivici</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Hai domande? Vuoi saperne di più? Compila il form e ti risponderemo il prima possibile.</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Oggetto</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Invia Messaggio</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="about" style="background-color: var(--bg-color);">
+            <div class="container">
+                <h2>Informazioni di Contatto</h2>
+                <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="service-card" style="text-align: center;">
+                        <div class="service-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>info@doyouremember.com</p>
+                        <p>support@doyouremember.com</p>
+                    </div>
+                    <div class="service-card" style="text-align: center;">
+                        <div class="service-icon">📱</div>
+                        <h3>Telefono</h3>
+                        <p>+39 02 1234 5678</p>
+                        <p>Lun-Ven: 9:00 - 18:00</p>
+                    </div>
+                    <div class="service-card" style="text-align: center;">
+                        <div class="service-icon">📍</div>
+                        <h3>Indirizzo</h3>
+                        <p>Via Example, 123</p>
+                        <p>20100 Milano, Italia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2>Domande Frequenti</h2>
+                <div class="about-content">
+                    <div class="about-text" style="text-align: left; max-width: 800px; margin: 0 auto;">
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-weight: 600;">Come funziona Do You Remember?</h3>
+                            <p style="color: var(--text-light);">Do You Remember ti permette di creare un testamento digitale sicuro dove conservare i tuoi ricordi, memorie e documenti importanti. Utilizziamo tecnologia blockchain per garantire autenticità e permanenza.</p>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-weight: 600;">I miei dati sono sicuri?</h3>
+                            <p style="color: var(--text-light);">Assolutamente sì. Utilizziamo crittografia avanzata e sistemi di sicurezza all'avanguardia per proteggere i tuoi dati. La tecnologia blockchain garantisce inoltre l'autenticità e la permanenza dei tuoi ricordi.</p>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-weight: 600;">Quanto costa?</h3>
+                            <p style="color: var(--text-light);">Contattaci per informazioni sui nostri piani e tariffe. Offriamo soluzioni personalizzate per ogni esigenza.</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem; font-weight: 600;">Come posso iniziare?</h3>
+                            <p style="color: var(--text-light);">Compila il form di contatto qui sopra o visita la pagina "Scopri di più" per maggiori informazioni. Il nostro team ti guiderà attraverso il processo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

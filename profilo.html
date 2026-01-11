@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Il Tuo Profilo - Do You Remember">
+    <title>Il Mio Profilo - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--medium-green) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 4px solid white;
+        }
+
+        .profile-info {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .file-upload-area {
+            border: 3px dashed var(--light-accent);
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background-color: var(--bg-light);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 2rem;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(162, 229, 216, 0.3);
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--accent-color);
+            background-color: rgba(66, 224, 195, 0.2);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .file-card {
+            background-color: var(--bg-color);
+            border: 2px solid var(--light-accent);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+
+        .file-preview {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .file-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+            font-size: 0.9rem;
+        }
+
+        .file-size {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-date {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+
+        .delete-file {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .delete-file:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="servizi.html">Servizi</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="profilo.html" class="active">Il Mio Profilo</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-header">
+            <div class="container">
+                <div class="profile-avatar" id="profileAvatar">👤</div>
+                <h1 id="profileName">Nome Utente</h1>
+                <p id="profileEmail">email@example.com</p>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <div class="profile-info">
+                    <h2 style="color: var(--secondary-color); margin-bottom: 1.5rem;">Informazioni Profilo</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <strong style="color: var(--secondary-color);">Data di Nascita:</strong>
+                            <p id="profileBirthdate" style="color: var(--text-light); margin-top: 0.5rem;">-</p>
+                        </div>
+                        <div>
+                            <strong style="color: var(--secondary-color);">Biografia:</strong>
+                            <p id="profileBio" style="color: var(--text-light); margin-top: 0.5rem;">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="text-align: center; color: var(--secondary-color); margin-bottom: 2rem;">I Miei File</h2>
+                
+                <div class="file-upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" class="file-input" multiple accept="image/*,video/*,.pdf,.doc,.docx">
+                    <span class="upload-icon">📁</span>
+                    <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Carica i Tuoi Ricordi</h3>
+                    <p style="color: var(--text-light);">Trascina i file qui o clicca per selezionare</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Supporta: immagini, video, PDF, documenti</p>
+                </div>
+
+                <div id="filesContainer">
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-state-icon">📂</div>
+                        <p>Nessun file caricato ancora</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Inizia a caricare i tuoi ricordi!</p>
+                    </div>
+                    <div class="files-grid" id="filesGrid" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
