@@ -12,6 +12,17 @@ function checkAuth() {
     return true;
 }
 
+// Formatta la data di nascita
+function formatBirthdate(dateString) {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('it-IT', { 
+        day: '2-digit', 
+        month: '2-digit', 
+        year: 'numeric' 
+    });
+}
+
 // Carica i dati del profilo
 function loadProfile() {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -19,7 +30,7 @@ function loadProfile() {
     if (user.name) {
         document.getElementById('profileName').textContent = user.name;
         document.getElementById('profileEmail').textContent = user.email;
-        document.getElementById('profileBirthdate').textContent = user.birthdate || '-';
+        document.getElementById('profileBirthdate').textContent = formatBirthdate(user.birthdate);
         document.getElementById('profileBio').textContent = user.bio || 'Nessuna biografia inserita';
         
         // Avatar iniziale con iniziale
@@ -306,6 +317,150 @@ function updateNavbar() {
 }
 
 // ============================================
+// LOGOUT
+// ============================================
+
+function handleLogout() {
+    if (confirm('Sei sicuro di voler fare logout?')) {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('userId');
+        
+        if (typeof showNotification === 'function') {
+            showNotification('Logout effettuato con successo', 'success');
+        }
+        
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 500);
+    }
+}
+
+// ============================================
+// MODIFICA PROFILO
+// ============================================
+
+function showEditProfileForm() {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const editForm = document.getElementById('editProfileForm');
+    const profileInfo = document.getElementById('profileInfo');
+    
+    if (!editForm || !user.email) return;
+    
+    // Popola il form con i dati attuali
+    document.getElementById('edit-name').value = user.name || '';
+    document.getElementById('edit-email').value = user.email || '';
+    document.getElementById('edit-birthdate').value = user.birthdate || '';
+    document.getElementById('edit-bio').value = user.bio || '';
+    document.getElementById('edit-password').value = '';
+    
+    // Mostra il form e nascondi le info
+    editForm.classList.add('active');
+    profileInfo.style.display = 'none';
+}
+
+function hideEditProfileForm() {
+    const editForm = document.getElementById('editProfileForm');
+    const profileInfo = document.getElementById('profileInfo');
+    
+    if (!editForm) return;
+    
+    editForm.classList.remove('active');
+    profileInfo.style.display = 'block';
+}
+
+function handleEditProfile(e) {
+    e.preventDefault();
+    
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (!user.email) {
+        alert('Errore: utente non trovato');
+        return;
+    }
+    
+    const formData = {
+        name: document.getElementById('edit-name').value.trim(),
+        email: document.getElementById('edit-email').value.trim().toLowerCase(),
+        birthdate: document.getElementById('edit-birthdate').value,
+        bio: document.getElementById('edit-bio').value.trim() || '',
+        password: document.getElementById('edit-password').value
+    };
+    
+    try {
+        // Validazione
+        if (!formData.name || formData.name.length < 2) {
+            throw new Error('Il nome deve contenere almeno 2 caratteri');
+        }
+        
+        if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            throw new Error('Inserisci un indirizzo email valido');
+        }
+        
+        if (formData.password && formData.password.length > 0 && formData.password.length < 6) {
+            throw new Error('La password deve contenere almeno 6 caratteri');
+        }
+        
+        if (!formData.birthdate) {
+            throw new Error('Inserisci la data di nascita');
+        }
+        
+        // Controlla se l'email è cambiata e se esiste già (solo se diversa dalla propria)
+        const allUsers = getAllUsers();
+        if (formData.email !== user.email) {
+            const emailExists = allUsers.some(u => u.email === formData.email && u.id !== user.id);
+            if (emailExists) {
+                throw new Error('Un utente con questa email esiste già');
+            }
+        }
+        
+        // Aggiorna l'utente nella lista
+        const userIndex = allUsers.findIndex(u => u.id === user.id);
+        if (userIndex === -1) {
+            throw new Error('Utente non trovato');
+        }
+        
+        // Aggiorna i dati dell'utente
+        allUsers[userIndex].name = formData.name;
+        allUsers[userIndex].email = formData.email;
+        allUsers[userIndex].birthdate = formData.birthdate;
+        allUsers[userIndex].bio = formData.bio;
+        if (formData.password && formData.password.length > 0) {
+            allUsers[userIndex].password = formData.password;
+        }
+        
+        // Salva la lista aggiornata
+        saveAllUsers(allUsers);
+        
+        // Aggiorna l'utente corrente nel localStorage
+        const updatedUser = {
+            id: user.id,
+            name: formData.name,
+            email: formData.email,
+            birthdate: formData.birthdate,
+            bio: formData.bio
+        };
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        
+        // Ricarica il profilo
+        loadProfile();
+        hideEditProfileForm();
+        
+        // Mostra notifica di successo
+        if (typeof showNotification === 'function') {
+            showNotification('Profilo aggiornato con successo!', 'success');
+        } else {
+            alert('Profilo aggiornato con successo!');
+        }
+    } catch (error) {
+        console.error('Errore:', error);
+        if (typeof showNotification === 'function') {
+            showNotification(`Errore: ${error.message}`, 'error');
+        } else {
+            alert(`Errore: ${error.message}`);
+        }
+    }
+}
+
+// ============================================
 // INIZIALIZZAZIONE
 // ============================================
 
@@ -324,6 +479,30 @@ document.addEventListener('DOMContentLoaded', function() {
         checkAuth();
         loadProfile();
         loadFiles();
+        
+        // Setup logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', handleLogout);
+        }
+        
+        // Setup edit profile button
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        if (editProfileBtn) {
+            editProfileBtn.addEventListener('click', showEditProfileForm);
+        }
+        
+        // Setup cancel edit button
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        if (cancelEditBtn) {
+            cancelEditBtn.addEventListener('click', hideEditProfileForm);
+        }
+        
+        // Setup edit profile form
+        const editProfileFormElement = document.getElementById('editProfileFormElement');
+        if (editProfileFormElement) {
+            editProfileFormElement.addEventListener('submit', handleEditProfile);
+        }
         
         // Setup upload area
         const uploadArea = document.getElementById('uploadArea');

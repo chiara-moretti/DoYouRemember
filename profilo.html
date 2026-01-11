@@ -157,6 +157,26 @@
             font-size: 4rem;
             margin-bottom: 1rem;
         }
+
+        .edit-profile-form {
+            display: none;
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .edit-profile-form.active {
+            display: block;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 <body>
@@ -172,6 +192,14 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="chi-siamo.html">Chi Siamo</a></li>
                     <li><a href="servizi.html">Servizi</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Prodotti</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="lumnia-token.html">Lumnia Token</a></li>
+                            <li><a href="memory-nest.html">Memory Nest</a></li>
+                            <li><a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer">Logo Kit App</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contatti.html">Contatti</a></li>
                     <li><a href="profilo.html" class="active">Il Mio Profilo</a></li>
                 </ul>
@@ -190,12 +218,48 @@
                 <div class="profile-avatar" id="profileAvatar"></div>
                 <h1 id="profileName">Nome Utente</h1>
                 <p id="profileEmail">email@example.com</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" id="editProfileBtn" style="background-color: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white;">Modifica Profilo</button>
+                    <button class="btn btn-secondary" id="logoutBtn" style="background-color: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white;">Logout</button>
+                </div>
             </div>
         </section>
 
         <section class="about">
             <div class="container">
-                <div class="profile-info">
+                <!-- Form Modifica Profilo -->
+                <div class="edit-profile-form" id="editProfileForm">
+                    <h2 style="color: var(--secondary-color); margin-bottom: 1.5rem;">Modifica Profilo</h2>
+                    <form id="editProfileFormElement">
+                        <div class="form-group">
+                            <label for="edit-name">Nome Completo</label>
+                            <input type="text" id="edit-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email</label>
+                            <input type="email" id="edit-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-birthdate">Data di Nascita</label>
+                            <input type="date" id="edit-birthdate" name="birthdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-bio">Biografia</label>
+                            <textarea id="edit-bio" name="bio" rows="4" placeholder="Racconta qualcosa di te..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-password">Nuova Password (lascia vuoto per non modificare)</label>
+                            <input type="password" id="edit-password" name="password" minlength="6">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelEditBtn">Annulla</button>
+                            <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Visualizzazione Profilo -->
+                <div class="profile-info" id="profileInfo">
                     <h2 style="color: var(--secondary-color); margin-bottom: 1.5rem;">Informazioni Profilo</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                         <div>
@@ -234,6 +298,9 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); text-decoration: none;">Accedi alla Logo Kit App</a>
+            </p>
         </div>
     </footer>
 
