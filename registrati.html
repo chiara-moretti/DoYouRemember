@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crea il tuo profilo - Do You Remember">
+    <title>Crea il Tuo Profilo - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="servizi.html">Servizi</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Crea il Tuo Profilo</h1>
+                <p class="hero-subtitle">Inizia a preservare i tuoi ricordi digitali</p>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Registrazione</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Compila il form per creare il tuo profilo e iniziare a costruire il tuo testamento digitale.</p>
+                <form class="contact-form" id="registrationForm">
+                    <div class="form-group">
+                        <label for="reg-name">Nome Completo</label>
+                        <input type="text" id="reg-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-birthdate">Data di Nascita</label>
+                        <input type="date" id="reg-birthdate" name="birthdate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-bio">Biografia (opzionale)</label>
+                        <textarea id="reg-bio" name="bio" rows="4" placeholder="Racconta qualcosa di te..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crea Profilo</button>
+                </form>
+                <p style="text-align: center; margin-top: 1.5rem; color: var(--text-light);">
+                    Hai già un profilo? <a href="login.html" style="color: var(--accent-color); font-weight: 600;">Accedi</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
