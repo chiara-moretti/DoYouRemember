@@ -1,36 +1,49 @@
 // Fix per GitHub Pages - determina il base path corretto
 (function() {
-    // Ottieni il percorso base della repository
-    const path = window.location.pathname;
-    const pathParts = path.split('/').filter(p => p);
-    
-    // Se siamo su GitHub Pages (path contiene il nome della repo)
-    if (pathParts.length > 0 && pathParts[0] !== '') {
-        // Trova il base path (es: /DoYouRemember/)
-        const repoName = pathParts[0];
-        const basePath = '/' + repoName + '/';
-        
-        // Crea un tag base se non esiste già
-        if (!document.querySelector('base')) {
-            const base = document.createElement('base');
-            base.href = basePath;
-            document.head.insertBefore(base, document.head.firstChild);
+    // Funzione per ottenere il base path
+    function getBasePath() {
+        const path = window.location.pathname;
+        // Se siamo su GitHub Pages (es: /DoYouRemember/ o /DoYouRemember/index.html)
+        if (path.includes('/DoYouRemember/') || path.startsWith('/DoYouRemember')) {
+            return '/DoYouRemember/';
         }
+        // Altrimenti siamo in locale o nella root
+        return '/';
     }
     
-    // Fix per le immagini con percorsi relativi
-    document.addEventListener('DOMContentLoaded', function() {
+    // Applica il fix alle immagini
+    function fixImagePaths() {
         const images = document.querySelectorAll('img[src^="images/"]');
+        const basePath = getBasePath();
+        
         images.forEach(img => {
             const originalSrc = img.getAttribute('src');
-            // Se l'immagine non si carica, prova con percorso assoluto
+            
+            // Se siamo su GitHub Pages, usa percorso assoluto
+            if (basePath !== '/') {
+                img.src = basePath + originalSrc;
+            }
+            
+            // Fallback se l'immagine non si carica
             img.onerror = function() {
                 if (!this.dataset.tried) {
                     this.dataset.tried = 'true';
-                    const basePath = window.location.pathname.split('/').slice(0, -1).join('/') || '';
-                    this.src = basePath + '/' + originalSrc;
+                    // Prova con percorso relativo
+                    if (basePath !== '/') {
+                        this.src = originalSrc;
+                    } else {
+                        // Prova con percorso assoluto
+                        this.src = '/' + originalSrc;
+                    }
                 }
             };
         });
-    });
+    }
+    
+    // Esegui quando il DOM è pronto
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixImagePaths);
+    } else {
+        fixImagePaths();
+    }
 })();
