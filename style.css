@@ -206,13 +206,36 @@ header {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    position: relative;
+    width: 30px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
 }
 
 .hamburger span {
     width: 25px;
     height: 3px;
     background-color: var(--text-color);
-    transition: var(--transition);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: block;
+    position: absolute;
+    left: 0;
+    border-radius: 2px;
+}
+
+.hamburger span:nth-child(1) {
+    top: 0;
+}
+
+.hamburger span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger span:nth-child(3) {
+    bottom: 0;
 }
 
 /* Hero Section */
@@ -901,16 +924,19 @@ section {
         background-color: var(--bg-color);
         width: 100%;
         text-align: center;
-        transition: var(--transition);
+        transition: left 0.3s ease;
         box-shadow: var(--shadow);
         padding: 2rem 0;
         gap: 0;
         max-height: calc(100vh - 70px);
         overflow-y: auto;
+        z-index: 9999;
+        height: calc(100vh - 70px);
     }
 
     .nav-menu.active {
         left: 0;
+        z-index: 9999;
     }
 
     .nav-menu li {
@@ -950,15 +976,21 @@ section {
     }
 
     .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        transform-origin: center;
     }
 
     .hamburger.active span:nth-child(2) {
         opacity: 0;
+        transform: translateY(-50%) scale(0);
     }
 
     .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
+        transform-origin: center;
     }
 
     .hero {

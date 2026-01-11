@@ -13,11 +13,35 @@ const navLinks = document.querySelectorAll('.nav-menu a');
 const header = document.querySelector('header');
 
 // Toggle menu mobile
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = navMenu.classList.contains('active');
+        
+        if (!isActive) {
+            // Apri il menu
+            navMenu.classList.add('active');
+            hamburger.classList.add('active');
+            // Salva la posizione di scroll corrente
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+            document.body.style.overflow = 'hidden';
+            document.body.dataset.scrollY = scrollY;
+        } else {
+            // Chiudi il menu
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            // Ripristina la posizione di scroll
+            const scrollY = document.body.dataset.scrollY || 0;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY || 0));
+            delete document.body.dataset.scrollY;
+        }
     });
 }
 
@@ -36,24 +60,60 @@ dropdowns.forEach(dropdown => {
 });
 
 // Chiudi menu quando si clicca su un link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
-        // Chiudi anche i dropdown
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('active');
+if (navLinks && navLinks.length > 0) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu) navMenu.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
+            // Ripristina la posizione di scroll
+            const scrollY = document.body.dataset.scrollY || 0;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY || 0));
+            delete document.body.dataset.scrollY;
+            // Chiudi anche i dropdown
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
         });
     });
-});
+}
 
 // Chiudi menu quando si clicca fuori
 document.addEventListener('click', (e) => {
-    if (hamburger && navMenu && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
+    if (hamburger && navMenu && navMenu.classList.contains('active')) {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            // Ripristina la posizione di scroll
+            const scrollY = document.body.dataset.scrollY || 0;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY || 0));
+            delete document.body.dataset.scrollY;
+        }
+    }
+});
+
+// Chiudi menu quando si ridimensiona la finestra (da mobile a desktop)
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && navMenu && hamburger) {
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            // Ripristina la posizione di scroll
+            const scrollY = document.body.dataset.scrollY || 0;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY || 0));
+            delete document.body.dataset.scrollY;
+        }
     }
 });
 
