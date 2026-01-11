@@ -1,4 +1,20 @@
-# Do You Remember - Backend Setup
+# Do You Remember
+
+Sito web per la creazione di testamenti digitali con sistema di gestione profili e caricamento file.
+
+## 🌐 GitHub Pages
+
+Il sito è pubblicato su GitHub Pages all'indirizzo:
+**https://chiara_moretti.github.io/DoYouRemember/**
+
+### Setup GitHub Pages
+
+1. Vai su: https://github.com/chiara_moretti/DoYouRemember/settings/pages
+2. Source: seleziona `main` branch
+3. Folder: `/ (root)`
+4. Clicca "Save"
+
+## 🚀 Backend Setup (Locale)
 
 ## Installazione
 
