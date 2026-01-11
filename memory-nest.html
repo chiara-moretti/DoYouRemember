@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Memory Nest - Luogo laico di proiezioni e commemorazione dei morti">
+    <title>Memory Nest - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+            box-shadow: var(--shadow);
+        }
+
+        .carousel-nav:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            background-color: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background-color: var(--accent-color);
+        }
+
+        .memory-nest-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--medium-green) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .memory-nest-content {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+
+        .memory-nest-description {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .memory-nest-description h2 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .memory-nest-description p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .memory-nest-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--light-accent);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-slide img {
+                height: 400px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-nav.prev {
+                left: 10px;
+            }
+
+            .carousel-nav.next {
+                right: 10px;
+            }
+
+            .memory-nest-description h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="servizi.html">Servizi</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="memory-nest-hero">
+            <div class="container">
+                <h1>Memory Nest</h1>
+                <p class="hero-subtitle">Luogo laico di proiezioni e commemorazione dei morti</p>
+            </div>
+        </section>
+
+        <section class="memory-nest-content">
+            <div class="container">
+                <div class="memory-nest-description">
+                    <h2>Il Nostro Spazio</h2>
+                    <p>Memory Nest è un luogo laico dedicato alla commemorazione e alla proiezione dei ricordi dei nostri cari. In questo spazio, le memorie prendono vita attraverso proiezioni digitali che permettono di rivivere momenti preziosi e mantenere viva la presenza di chi non c'è più.</p>
+                    
+                    <p>Crediamo che la commemorazione non debba essere legata a un credo religioso specifico, ma possa essere un momento universale di riflessione, condivisione e celebrazione della vita. Memory Nest offre un ambiente accogliente e rispettoso dove ogni persona può ricordare e onorare i propri cari nel modo che ritiene più appropriato.</p>
+
+                    <p>Attraverso tecnologie innovative, trasformiamo i ricordi digitali in esperienze immersive che permettono di proiettare foto, video e storie in uno spazio dedicato. Questo luogo diventa così un ponte tra passato e presente, dove le memorie continuano a vivere e a ispirare.</p>
+                </div>
+
+                <!-- Carosello Immagini -->
+                <div class="carousel-container">
+                    <div class="carousel-slides" id="carouselSlides">
+                        <div class="carousel-slide">
+                            <img src="images/nest.jpeg" alt="Memory Nest - Vista 1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/nest1.jpeg" alt="Memory Nest - Vista 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="images/nest2.jpeg" alt="Memory Nest - Vista 3">
+                        </div>
+                    </div>
+                    <button class="carousel-nav prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                </div>
+
+                <div class="memory-nest-description" style="margin-top: 4rem;">
+                    <h2>Caratteristiche del Memory Nest</h2>
+                    <div class="memory-nest-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎬</div>
+                            <h3>Proiezioni Digitali</h3>
+                            <p>Spazio dedicato per proiettare foto, video e ricordi dei tuoi cari in alta qualità, creando un'atmosfera intima e coinvolgente.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🕯️</div>
+                            <h3>Commemorazione Laica</h3>
+                            <p>Un ambiente rispettoso e inclusivo, aperto a tutti indipendentemente dal credo religioso, dove celebrare la vita e i ricordi.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">💭</div>
+                            <h3>Spazio di Riflessione</h3>
+                            <p>Un luogo tranquillo e accogliente dove fermarsi, ricordare e condividere storie e memorie con chi ami.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🌿</div>
+                            <h3>Ambiente Naturale</h3>
+                            <p>Uno spazio che si integra armoniosamente con la natura, creando un'atmosfera serena e rigenerante per la commemorazione.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="servizi.html" class="btn btn-primary">Torna ai Servizi</a>
+                    <a href="contatti.html" class="btn btn-secondary" style="margin-left: 1rem;">Contattaci</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="path-fix.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Carosello immagini
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        // Crea i dots
+        const dotsContainer = document.getElementById('carouselDots');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('onclick', `goToSlide(${i})`);
+            dotsContainer.appendChild(dot);
+        }
+
+        function showSlide(index) {
+            if (index >= totalSlides) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = index;
+            }
+
+            const slidesContainer = document.getElementById('carouselSlides');
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Aggiorna i dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        // Auto-play del carosello (opzionale)
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000); // Cambia slide ogni 5 secondi
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Avvia auto-play
+        startAutoPlay();
+
+        // Pausa quando l'utente interagisce
+        document.querySelector('.carousel-container').addEventListener('mouseenter', stopAutoPlay);
+        document.querySelector('.carousel-container').addEventListener('mouseleave', startAutoPlay);
+    </script>
+</body>
+</html>

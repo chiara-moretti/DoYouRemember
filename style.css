@@ -323,6 +323,15 @@ header {
     border-color: var(--accent-color);
 }
 
+a .service-card {
+    cursor: pointer;
+}
+
+a:hover .service-card {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
 .service-card:hover::before {
     background: rgba(255, 255, 255, 0.65);
 }
