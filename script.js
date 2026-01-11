@@ -50,30 +50,64 @@ const dropdowns = document.querySelectorAll('.dropdown');
 dropdowns.forEach(dropdown => {
     const toggle = dropdown.querySelector('.dropdown-toggle');
     if (toggle) {
-        toggle.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
+        const handleDropdownToggle = (e) => {
+            // Su mobile, previeni sempre il comportamento di default e toggle il dropdown
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
                 e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                
+                // Chiudi altri dropdown aperti
+                dropdowns.forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+                
+                // Toggle il dropdown corrente
                 dropdown.classList.toggle('active');
+                
+                return false;
+            } else {
+                // Su desktop, previeni solo se il link è "#"
+                if (toggle.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
             }
-        });
+        };
+        
+        // Aggiungi listener per click e touchstart (per mobile)
+        toggle.addEventListener('click', handleDropdownToggle, true); // Capture phase
+        toggle.addEventListener('touchstart', handleDropdownToggle, { passive: false, capture: true });
     }
 });
 
 // Chiudi menu quando si clicca su un link
 if (navLinks && navLinks.length > 0) {
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu) navMenu.classList.remove('active');
-            if (hamburger) hamburger.classList.remove('active');
-            // Ripristina la posizione di scroll
-            const scrollY = document.body.dataset.scrollY || 0;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.style.overflow = '';
-            window.scrollTo(0, parseInt(scrollY || 0));
-            delete document.body.dataset.scrollY;
-            // Chiudi anche i dropdown
+        link.addEventListener('click', (e) => {
+            // Se è un link del dropdown menu, chiudi il dropdown prima
+            const dropdown = link.closest('.dropdown');
+            if (dropdown) {
+                dropdown.classList.remove('active');
+            }
+            
+            // Chiudi il menu mobile solo se non è un link esterno
+            if (!link.hasAttribute('target') || link.getAttribute('target') !== '_blank') {
+                if (navMenu) navMenu.classList.remove('active');
+                if (hamburger) hamburger.classList.remove('active');
+                // Ripristina la posizione di scroll
+                const scrollY = document.body.dataset.scrollY || 0;
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, parseInt(scrollY || 0));
+                delete document.body.dataset.scrollY;
+            }
+            
+            // Chiudi tutti i dropdown
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });
@@ -83,6 +117,7 @@ if (navLinks && navLinks.length > 0) {
 
 // Chiudi menu quando si clicca fuori
 document.addEventListener('click', (e) => {
+    // Chiudi menu mobile se aperto
     if (hamburger && navMenu && navMenu.classList.contains('active')) {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             navMenu.classList.remove('active');
@@ -96,6 +131,15 @@ document.addEventListener('click', (e) => {
             window.scrollTo(0, parseInt(scrollY || 0));
             delete document.body.dataset.scrollY;
         }
+    }
+    
+    // Chiudi dropdown se si clicca fuori (solo su mobile)
+    if (window.innerWidth <= 768) {
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target) && dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            }
+        });
     }
 });
 
@@ -114,6 +158,14 @@ window.addEventListener('resize', () => {
             window.scrollTo(0, parseInt(scrollY || 0));
             delete document.body.dataset.scrollY;
         }
+        // Chiudi tutti i dropdown quando si passa a desktop
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+        });
+    }
+    // Reset overflow su resize
+    if (window.innerWidth > 768) {
+        document.body.style.overflow = '';
     }
 });
 
@@ -367,14 +419,7 @@ serviceCards.forEach(card => {
 // ============================================
 // PREVENZIONE SCROLL QUANDO MENU È APERTO
 // ============================================
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && navMenu && hamburger) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
+// (Gestito nel listener resize principale sopra)
 
 // ============================================
 // LAZY LOADING PER IMMAGINI (se aggiunte in futuro)

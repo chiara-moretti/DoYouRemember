@@ -950,6 +950,33 @@ section {
     }
 
     /* Dropdown su mobile */
+    .nav-menu .dropdown {
+        width: 100%;
+        position: relative;
+    }
+
+    .dropdown-toggle {
+        position: relative;
+        user-select: none;
+        cursor: pointer;
+        width: 100%;
+        display: block;
+        padding: 0.5rem 0;
+        pointer-events: auto;
+    }
+
+    .dropdown-toggle::after {
+        content: ' ▼';
+        font-size: 0.7em;
+        opacity: 0.6;
+        transition: transform 0.3s ease;
+        display: inline-block;
+    }
+
+    .dropdown.active .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
+
     .dropdown-menu {
         position: static;
         opacity: 1;
@@ -961,17 +988,22 @@ section {
         margin-top: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        width: 100%;
+        pointer-events: auto;
     }
 
     .dropdown.active .dropdown-menu {
-        max-height: 300px;
+        max-height: 500px;
         padding: 0.5rem 0 0.5rem 1.5rem;
     }
 
     .dropdown-menu a {
         padding: 0.75rem 0;
         font-size: 0.9rem;
+        display: block;
+        width: 100%;
+        pointer-events: auto;
     }
 
     .hamburger.active span:nth-child(1) {
