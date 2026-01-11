@@ -11,7 +11,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('.')); // Serve i file statici
+app.use(express.static('.', { 
+    etag: false,
+    lastModified: false,
+    setHeaders: (res, path) => {
+        if (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    }
+})); // Serve i file statici
 
 // Percorso del file database
 const DB_PATH = path.join(__dirname, 'data', 'users.json');
