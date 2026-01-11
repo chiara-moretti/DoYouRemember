@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scegli il piano abbonamento perfetto per te - Do You Remember">
+    <title>Abbonamenti - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pricing-section {
+            padding: 120px 0;
+            background-color: #ffffff;
+        }
+
+        .pricing-section h2 {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        .service-type-section {
+            margin-bottom: 6rem;
+        }
+
+        .service-type-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .pricing-card {
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(38, 140, 120, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-color);
+            border-width: 3px;
+            background: linear-gradient(135deg, rgba(66, 224, 195, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .pricing-plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .pricing-age-range {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.6rem 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(162, 229, 216, 0.3);
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 14px 35px;
+        }
+
+        .pricing-card.featured .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .pricing-card.featured .btn-primary:hover {
+            background-color: var(--medium-green);
+            color: white;
+        }
+
+        .pricing-info {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-info p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-info strong {
+            color: var(--secondary-color);
+        }
+
+        .one-time-payment {
+            background: linear-gradient(135deg, rgba(38, 140, 120, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+            border: 2px solid var(--medium-green);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-section {
+                padding: 80px 0;
+            }
+
+            .pricing-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .service-type-title {
+                font-size: 2rem;
+            }
+
+            .pricing-subtitle {
+                font-size: 1rem;
+                margin-bottom: 3rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 15px;
+            }
+
+            .pricing-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .pricing-price {
+                font-size: 2.5rem;
+            }
+
+            .pricing-info {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li class="dropdown">
+                        <a href="servizi.html" class="dropdown-toggle">Servizi</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="registrati.html">Crea il tuo testamento digitale</a></li>
+                            <li><a href="registrati.html">Crea il testamento digitale di un tuo caro</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Prodotti</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="lumnia-token.html">Lumnia Token</a></li>
+                            <li><a href="memory-nest.html">Memory Nest</a></li>
+                            <li><a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer">Logo Kit App</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="abbonamenti.html">Abbonamenti</a></li>
+                    <li><a href="profilo.html">Il Mio Profilo</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Abbonamenti</h1>
+                <p class="hero-subtitle">Scegli il piano perfetto per preservare i tuoi ricordi</p>
+            </div>
+        </section>
+
+        <section class="pricing-section">
+            <div class="container">
+                <h2>I Nostri Piani</h2>
+                <p class="pricing-subtitle">Soluzioni flessibili per ogni esigenza</p>
+
+                <!-- Testamento Digitale Proprio -->
+                <div class="service-type-section">
+                    <h3 class="service-type-title">Testamento Digitale Proprio</h3>
+                    <p class="pricing-subtitle" style="margin-bottom: 3rem;">Prezzi annuali basati sulla fascia d'età</p>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <h4 class="pricing-plan-name">Giovani</h4>
+                            <div class="pricing-age-range">18 - 30 anni</div>
+                            <div class="pricing-price">€10</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Creazione testamento digitale</li>
+                                <li>Archiviazione sicura</li>
+                                <li>Certificazione blockchain</li>
+                                <li>Accesso permanente</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-secondary">Scegli questo Piano</a>
+                        </div>
+
+                        <div class="pricing-card featured">
+                            <h4 class="pricing-plan-name">Adulti</h4>
+                            <div class="pricing-age-range">30 - 45 anni</div>
+                            <div class="pricing-price">€15</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Creazione testamento digitale</li>
+                                <li>Archiviazione sicura</li>
+                                <li>Certificazione blockchain</li>
+                                <li>Accesso permanente</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-primary">Scegli questo Piano</a>
+                        </div>
+
+                        <div class="pricing-card">
+                            <h4 class="pricing-plan-name">Maturi</h4>
+                            <div class="pricing-age-range">45 - 60 anni</div>
+                            <div class="pricing-price">€20</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Creazione testamento digitale</li>
+                                <li>Archiviazione sicura</li>
+                                <li>Certificazione blockchain</li>
+                                <li>Accesso permanente</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-secondary">Scegli questo Piano</a>
+                        </div>
+
+                        <div class="pricing-card">
+                            <h4 class="pricing-plan-name">Senior</h4>
+                            <div class="pricing-age-range">60 - 75 anni</div>
+                            <div class="pricing-price">€25</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Creazione testamento digitale</li>
+                                <li>Archiviazione sicura</li>
+                                <li>Certificazione blockchain</li>
+                                <li>Accesso permanente</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-secondary">Scegli questo Piano</a>
+                        </div>
+
+                        <div class="pricing-card">
+                            <h4 class="pricing-plan-name">Senior Plus</h4>
+                            <div class="pricing-age-range">75+ anni</div>
+                            <div class="pricing-price">€30</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Creazione testamento digitale</li>
+                                <li>Archiviazione sicura</li>
+                                <li>Certificazione blockchain</li>
+                                <li>Accesso permanente</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-secondary">Scegli questo Piano</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testamento Digitale di un Caro -->
+                <div class="service-type-section">
+                    <h3 class="service-type-title">Testamento Digitale di un Caro</h3>
+                    <p class="pricing-subtitle" style="margin-bottom: 3rem;">Pagamento una tantum per gestire il profilo di un tuo caro</p>
+                    <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 500px;">
+                        <div class="pricing-card one-time-payment">
+                            <h4 class="pricing-plan-name">Gestione Profilo Caro</h4>
+                            <div class="pricing-price">€500</div>
+                            <div class="pricing-period">pagamento una tantum</div>
+                            <ul class="pricing-features">
+                                <li>Caricamento contenuti sul profilo del caro</li>
+                                <li>Gestione completa del testamento digitale</li>
+                                <li>Disponibile solo se il caro possedeva un profilo</li>
+                                <li>Accesso permanente al profilo</li>
+                                <li>Archiviazione sicura e certificata</li>
+                            </ul>
+                            <a href="registrati.html" class="btn btn-primary">Scopri di Più</a>
+                        </div>
+                    </div>
+                    <div class="pricing-info" style="margin-top: 2rem;">
+                        <p><strong>Nota importante:</strong> Questo servizio è disponibile solo se il tuo caro possedeva già un profilo registrato nella nostra app o sito web.</p>
+                    </div>
+                </div>
+
+                <!-- Proiezioni Memory Nest -->
+                <div class="service-type-section" style="margin-bottom: 0;">
+                    <h3 class="service-type-title">Proiezioni Memory Nest</h3>
+                    <p class="pricing-subtitle" style="margin-bottom: 3rem;">Proiezioni commemorative nello spazio Memory Nest</p>
+                    <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div class="pricing-card">
+                            <h4 class="pricing-plan-name">Proiezione Singola</h4>
+                            <div class="pricing-price">€5</div>
+                            <div class="pricing-period">per proiezione</div>
+                            <ul class="pricing-features">
+                                <li>Una proiezione singola</li>
+                                <li>Massimo una proiezione al mese</li>
+                                <li>Spazio Memory Nest dedicato</li>
+                                <li>Proiezione di foto e video</li>
+                            </ul>
+                            <a href="contatti.html" class="btn btn-secondary">Prenota Proiezione</a>
+                        </div>
+
+                        <div class="pricing-card featured">
+                            <h4 class="pricing-plan-name">Abbonamento Mensile</h4>
+                            <div class="pricing-price">€40</div>
+                            <div class="pricing-period">all'anno</div>
+                            <ul class="pricing-features">
+                                <li>Una proiezione al mese</li>
+                                <li>12 proiezioni all'anno</li>
+                                <li>Spazio Memory Nest dedicato</li>
+                                <li>Proiezione di foto e video</li>
+                                <li>Risparmio rispetto alle singole</li>
+                            </ul>
+                            <a href="contatti.html" class="btn btn-primary">Scegli Abbonamento</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-info" style="margin-top: 4rem;">
+                    <p><strong>Tutti i servizi includono:</strong></p>
+                    <p>✓ Crittografia end-to-end per la massima sicurezza</p>
+                    <p>✓ Tecnologia blockchain per autenticità e permanenza</p>
+                    <p>✓ Interfaccia intuitiva e facile da usare</p>
+                    <p>✓ Supporto dedicato per ogni esigenza</p>
+                    <p style="margin-top: 1.5rem; font-size: 0.9rem;">* I prezzi sono in euro. Per il testamento digitale proprio, il prezzo è basato sulla fascia d'età al momento della sottoscrizione.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="services" style="background-color: var(--bg-color);">
+            <div class="container">
+                <h2>Perché Scegliere i Nostri Servizi</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>Sicurezza Garantita</h3>
+                        <p>I tuoi ricordi sono protetti con crittografia avanzata e tecnologia blockchain per garantire autenticità e permanenza.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>Prezzi Trasparenti</h3>
+                        <p>Prezzi chiari e trasparenti basati sulle tue esigenze. Nessun costo nascosto, nessuna sorpresa.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>Accesso Permanente</h3>
+                        <p>I tuoi ricordi sono conservati in modo permanente e accessibili quando ne hai bisogno, per sempre.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"></div>
+                        <h3>Supporto Dedicato</h3>
+                        <p>Il nostro team è sempre disponibile per aiutarti con qualsiasi domanda o necessità.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Hai Domande?</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Contattaci per maggiori informazioni sui nostri piani o per un preventivo personalizzato.</p>
+                <div class="button-group">
+                    <a href="contatti.html" class="btn btn-primary">Contattaci</a>
+                    <a href="registrati.html" class="btn btn-secondary">Registrati Ora</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); text-decoration: none;">Accedi alla Logo Kit App</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="path-fix.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
