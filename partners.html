@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="I nostri partner - Do You Remember">
+    <title>Partners - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .partners-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .partner-card {
+            background-color: var(--bg-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--light-accent);
+            transition: var(--transition);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+
+        .partner-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .partner-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .partner-category {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .payment-badge {
+            background-color: var(--bg-light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li class="dropdown">
+                        <a href="servizi.html" class="dropdown-toggle">Servizi</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="registrati.html">Crea il tuo testamento digitale</a></li>
+                            <li><a href="registrati.html">Crea il testamento digitale di un tuo caro</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Prodotti</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="lumnia-token.html">Lumnia Token</a></li>
+                            <li><a href="memory-nest.html">Memory Nest</a></li>
+                            <li><a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer">Web App</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="profilo.html">Il Mio Profilo</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>I Nostri Partners</h1>
+                <p class="hero-subtitle">Collaboriamo con aziende leader per offrirti il miglior servizio</p>
+            </div>
+        </section>
+
+        <section class="partners-section">
+            <div class="container">
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-category">Stampa 3D</div>
+                        <h3>Aziende Specializzate</h3>
+                        <p>Aziende specializzate in stampe 3D per la creazione di oggetti commemorativi personalizzati.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Design Studio</div>
+                        <h3>ATIO Studio</h3>
+                        <p>Studio di design specializzato nella creazione di soluzioni innovative e personalizzate.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Distribuzione</div>
+                        <h3>Servizi di Distribuzione</h3>
+                        <p>Pompe Funebri per servizi di distribuzione e consegna dedicati.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Pagamenti</div>
+                        <h3>Servizi di Pagamento</h3>
+                        <p>Accettiamo pagamenti tramite i principali metodi di pagamento sicuri e affidabili.</p>
+                        <div class="payment-methods">
+                            <span class="payment-badge">PayPal</span>
+                            <span class="payment-badge">Visa</span>
+                            <span class="payment-badge">Mastercard</span>
+                            <span class="payment-badge">ApplePay</span>
+                            <span class="payment-badge">SatisPay</span>
+                        </div>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Allestimenti</div>
+                        <h3>Benfenati S.p.A.</h3>
+                        <p>Impresa specializzata in allestimenti per eventi e cerimonie commemorative.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Design Studio</div>
+                        <h3>Dotdotdot Studio</h3>
+                        <p>Studio creativo specializzato in design digitale e soluzioni innovative.</p>
+                    </div>
+
+                    <div class="partner-card">
+                        <div class="partner-category">Cloud & Storage</div>
+                        <h3>Google</h3>
+                        <p>Spazio Cloud, Server e Drive per la conservazione sicura e accessibile dei tuoi dati.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2>Vuoi Diventare Partner?</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Sei interessato a collaborare con noi? Contattaci per maggiori informazioni.</p>
+                <div class="button-group">
+                    <a href="contatti.html" class="btn btn-primary">Contattaci</a>
+                    <a href="index.html" class="btn btn-secondary">Torna alla Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://logo-kit-18808599.figma.site" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); text-decoration: none;">Accedi alla Logo Kit App</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="path-fix.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
