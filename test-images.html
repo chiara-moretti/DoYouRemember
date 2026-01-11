@@ -24,8 +24,8 @@
         const images = ['images/logo.png', 'images/token.jpeg', 'images/nest.jpeg'];
         images.forEach(src => {
             const img = new Image();
-            img.onload = () => console.log(`✅ ${src} caricata correttamente`);
-            img.onerror = () => console.error(`❌ ${src} NON caricata`);
+            img.onload = () => console.log(`${src} caricata correttamente`);
+            img.onerror = () => console.error(`${src} NON caricata`);
             img.src = src;
         });
     </script>

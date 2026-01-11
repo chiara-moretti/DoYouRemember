@@ -21,12 +21,30 @@ if (hamburger) {
     });
 }
 
+// Gestione dropdown menu
+const dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    }
+});
+
 // Chiudi menu quando si clicca su un link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
         document.body.style.overflow = '';
+        // Chiudi anche i dropdown
+        dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+        });
     });
 });
 

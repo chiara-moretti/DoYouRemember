@@ -30,11 +30,19 @@ function loadProfile() {
     }
 }
 
-// URL del backend API
-const API_URL = 'http://localhost:3000/api';
+// Carica tutti gli utenti dal localStorage
+function getAllUsers() {
+    const usersJson = localStorage.getItem('allUsers');
+    return usersJson ? JSON.parse(usersJson) : [];
+}
+
+// Salva tutti gli utenti nel localStorage
+function saveAllUsers(users) {
+    localStorage.setItem('allUsers', JSON.stringify(users));
+}
 
 // Registrazione nuovo utente
-async function handleRegistration(e) {
+function handleRegistration(e) {
     e.preventDefault();
     
     const submitButton = e.target.querySelector('button[type="submit"]');
@@ -44,50 +52,82 @@ async function handleRegistration(e) {
     submitButton.disabled = true;
     
     const formData = {
-        name: document.getElementById('reg-name').value,
-        email: document.getElementById('reg-email').value,
+        name: document.getElementById('reg-name').value.trim(),
+        email: document.getElementById('reg-email').value.trim().toLowerCase(),
         password: document.getElementById('reg-password').value,
         birthdate: document.getElementById('reg-birthdate').value,
-        bio: document.getElementById('reg-bio').value || ''
+        bio: document.getElementById('reg-bio').value.trim() || ''
     };
     
     try {
-        // Invia i dati al backend
-        const response = await fetch(`${API_URL}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            // Salva anche nel localStorage per compatibilità
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-            localStorage.setItem('userId', data.user.id);
-            
-            // Mostra notifica di successo
-            if (typeof showNotification === 'function') {
-                showNotification('Profilo creato con successo!', 'success');
-            } else {
-                alert('Profilo creato con successo!');
-            }
-            
-            // Reindirizza al profilo
-            setTimeout(() => {
-                window.location.href = 'profilo.html';
-            }, 1000);
-        } else {
-            throw new Error(data.message || 'Errore nella registrazione');
+        // Validazione
+        if (!formData.name || formData.name.length < 2) {
+            throw new Error('Il nome deve contenere almeno 2 caratteri');
         }
+        
+        if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            throw new Error('Inserisci un indirizzo email valido');
+        }
+        
+        if (!formData.password || formData.password.length < 6) {
+            throw new Error('La password deve contenere almeno 6 caratteri');
+        }
+        
+        if (!formData.birthdate) {
+            throw new Error('Inserisci la data di nascita');
+        }
+        
+        // Controlla se l'email esiste già
+        const allUsers = getAllUsers();
+        const emailExists = allUsers.some(user => user.email === formData.email);
+        
+        if (emailExists) {
+            throw new Error('Un utente con questa email esiste già');
+        }
+        
+        // Crea nuovo utente
+        const newUser = {
+            id: Date.now().toString(),
+            name: formData.name,
+            email: formData.email,
+            password: formData.password, // In produzione, usa bcrypt per hashare la password
+            birthdate: formData.birthdate,
+            bio: formData.bio,
+            createdAt: new Date().toISOString()
+        };
+        
+        // Salva l'utente nella lista
+        allUsers.push(newUser);
+        saveAllUsers(allUsers);
+        
+        // Salva l'utente corrente nel localStorage
+        const userForSession = {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+            birthdate: newUser.birthdate,
+            bio: newUser.bio
+        };
+        localStorage.setItem('currentUser', JSON.stringify(userForSession));
+        localStorage.setItem('userId', newUser.id);
+        
+        // Mostra notifica di successo
+        if (typeof showNotification === 'function') {
+            showNotification('Profilo creato con successo!', 'success');
+        } else {
+            alert('Profilo creato con successo!');
+        }
+        
+        // Reindirizza al profilo
+        setTimeout(() => {
+            window.location.href = 'profilo.html';
+        }, 1000);
     } catch (error) {
         console.error('Errore:', error);
         if (typeof showNotification === 'function') {
-            showNotification(`Errore: ${error.message}. Assicurati che il server sia avviato.`, 'error');
+            showNotification(`Errore: ${error.message}`, 'error');
         } else {
-            alert(`Errore: ${error.message}\n\nAssicurati che il server backend sia avviato su http://localhost:3000`);
+            alert(`Errore: ${error.message}`);
         }
         submitButton.textContent = originalText;
         submitButton.disabled = false;

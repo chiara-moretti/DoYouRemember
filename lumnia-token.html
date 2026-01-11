@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lumnia Token - Certificazione blockchain per i tuoi ricordi digitali">
+    <title>Lumnia Token - Do You Remember</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .lumnia-token-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--medium-green) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .lumnia-token-hero .hero-subtitle {
+            color: #ffffff !important;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0.95;
+        }
+
+        .lumnia-token-hero h1 {
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lumnia-token-content {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+
+        .lumnia-token-description {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .lumnia-token-description h2 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .lumnia-token-description p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .lumnia-token-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--light-accent);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .lumnia-token-content .button-group {
+            margin-top: 6rem !important;
+        }
+
+        .token-image-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .token-image-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        @media (max-width: 768px) {
+            .lumnia-token-description h2 {
+                font-size: 2rem;
+            }
+
+            .lumnia-token-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                    <li><a href="servizi.html">Servizi</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="profilo.html">Il Mio Profilo</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="lumnia-token-hero">
+            <div class="container">
+                <h1>Lumnia Token</h1>
+                <p class="hero-subtitle">Certificazione blockchain per l'autenticità e la permanenza dei tuoi ricordi</p>
+            </div>
+        </section>
+
+        <section class="lumnia-token-content">
+            <div class="container">
+                <div class="lumnia-token-description">
+                    <h2>Cos'è Lumnia Token</h2>
+                    <p>Lumnia Token è un sistema innovativo basato su tecnologia blockchain che garantisce l'autenticità, la permanenza e la tracciabilità dei tuoi ricordi digitali. Ogni memoria, foto, video o documento importante viene certificato e registrato sulla blockchain, creando un'impronta digitale unica e immutabile.</p>
+                    
+                    <p>Grazie alla tecnologia blockchain, i tuoi ricordi diventano permanenti e verificabili. Una volta certificati con Lumnia Token, i tuoi contenuti digitali non possono essere alterati o modificati, garantendo che rimangano autentici e intatti per sempre, anche attraverso le generazioni.</p>
+
+                    <p>Lumnia Token lavora in sinergia con Memory Nest per offrirti una soluzione completa: mentre Memory Nest ti permette di organizzare e conservare i tuoi ricordi, Lumnia Token garantisce la loro autenticità e permanenza attraverso la certificazione blockchain.</p>
+                </div>
+
+                <!-- Immagine Token -->
+                <div class="token-image-container">
+                    <img src="images/token.jpeg" alt="Lumnia Token">
+                </div>
+
+                <div class="lumnia-token-description" style="margin-top: 4rem;">
+                    <h2>Caratteristiche di Lumnia Token</h2>
+                    <div class="lumnia-token-features">
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <h3>Certificazione Blockchain</h3>
+                            <p>Ogni ricordo viene certificato e registrato sulla blockchain, creando un'impronta digitale unica e immutabile che garantisce l'autenticità del contenuto.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <h3>Permanenza Garantita</h3>
+                            <p>Una volta certificato, il tuo ricordo è protetto per sempre. La tecnologia blockchain garantisce che i contenuti rimangano intatti e accessibili attraverso le generazioni.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <h3>Tracciabilità Completa</h3>
+                            <p>Ogni certificazione è tracciabile e verificabile. Puoi sempre verificare l'autenticità e la provenienza dei tuoi ricordi certificati.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"></div>
+                            <h3>Sicurezza Avanzata</h3>
+                            <p>La crittografia blockchain garantisce che i tuoi ricordi siano protetti da alterazioni, falsificazioni e perdite accidentali.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group" style="margin-top: 6rem;">
+                    <a href="servizi.html" class="btn btn-primary">Torna ai Servizi</a>
+                    <a href="contatti.html" class="btn btn-secondary">Contattaci</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Do You Remember. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="path-fix.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -12,27 +12,34 @@
     <style>
         .carousel-container {
             position: relative;
+            width: 100%;
             max-width: 1000px;
             margin: 3rem auto;
             overflow: hidden;
             border-radius: 15px;
             box-shadow: var(--shadow-hover);
+            aspect-ratio: 16/9;
         }
 
         .carousel-slides {
             display: flex;
             transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
         }
 
         .carousel-slide {
             min-width: 100%;
+            width: 100%;
             position: relative;
+            flex-shrink: 0;
         }
 
         .carousel-slide img {
             width: 100%;
-            height: 600px;
+            height: 100%;
             object-fit: cover;
+            object-position: center;
             display: block;
         }
 
@@ -96,6 +103,17 @@
             color: white;
             padding: 80px 0;
             text-align: center;
+        }
+
+        .memory-nest-hero .hero-subtitle {
+            color: #ffffff !important;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0.95;
+        }
+
+        .memory-nest-hero h1 {
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
         }
 
         .memory-nest-content {
@@ -166,9 +184,19 @@
             text-align: left;
         }
 
+        .memory-nest-content .button-group {
+            margin-top: 6rem !important;
+        }
+
         @media (max-width: 768px) {
+            .carousel-container {
+                aspect-ratio: 4/3;
+                margin: 2rem auto;
+            }
+
             .carousel-slide img {
-                height: 400px;
+                width: 100%;
+                height: 100%;
             }
 
             .carousel-nav {
@@ -205,6 +233,7 @@
                     <li><a href="chi-siamo.html">Chi Siamo</a></li>
                     <li><a href="servizi.html">Servizi</a></li>
                     <li><a href="contatti.html">Contatti</a></li>
+                    <li><a href="profilo.html">Il Mio Profilo</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -256,29 +285,29 @@
                     <h2>Caratteristiche del Memory Nest</h2>
                     <div class="memory-nest-features">
                         <div class="feature-card">
-                            <div class="feature-icon">🎬</div>
+                            <div class="feature-icon"></div>
                             <h3>Proiezioni Digitali</h3>
                             <p>Spazio dedicato per proiettare foto, video e ricordi dei tuoi cari in alta qualità, creando un'atmosfera intima e coinvolgente.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">🕯️</div>
+                            <div class="feature-icon"></div>
                             <h3>Commemorazione Laica</h3>
                             <p>Un ambiente rispettoso e inclusivo, aperto a tutti indipendentemente dal credo religioso, dove celebrare la vita e i ricordi.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">💭</div>
+                            <div class="feature-icon"></div>
                             <h3>Spazio di Riflessione</h3>
                             <p>Un luogo tranquillo e accogliente dove fermarsi, ricordare e condividere storie e memorie con chi ami.</p>
                         </div>
                         <div class="feature-card">
-                            <div class="feature-icon">🌿</div>
+                            <div class="feature-icon"></div>
                             <h3>Ambiente Naturale</h3>
                             <p>Uno spazio che si integra armoniosamente con la natura, creando un'atmosfera serena e rigenerante per la commemorazione.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="button-group" style="margin-top: 3rem;">
+                <div class="button-group" style="margin-top: 6rem;">
                     <a href="servizi.html" class="btn btn-primary">Torna ai Servizi</a>
                     <a href="contatti.html" class="btn btn-secondary">Contattaci</a>
                 </div>
